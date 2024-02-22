@@ -1,0 +1,22 @@
+{% block content %}
+
+<div class="mx-auto p-2 center">
+    <h1>Все посты:</h1>
+    <table>
+        {% for a in articles %}
+        <tr>
+            <td style="background-color: lightgrey">
+                <a href="/profile/{{a.id}}">
+                    <img src="\static\img\{{ a.image }}"
+                         width="50"
+                         height="50">
+                </a>
+            </td>
+            <td style="background-color: lightgrey"><h1>{{a.name}}</h1>
+            </td>
+        </tr>
+        {% endfor %}
+        </li>
+    </table>
+</div>
+{% endblock %}
