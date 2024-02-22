@@ -23,7 +23,7 @@ login_manager.init_app(app)
 
 UPLOAD_FOLDER = os.getcwd() + '\\static\\img'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-DEFAULT_IMAGE = r'D:\_\work\bit2\38\static\img\default_image.png'
+DEFAULT_IMAGE = 'default_image.png'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
