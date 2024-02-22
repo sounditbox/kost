@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="mx-auto p-2 center">
+    <h1>Пользователи:</h1>
+    <table>
+        {% for user in users %}
+        <tr>
+            <td style="background-color: lightgrey">
+                <a href="/profile/{{user.id}}">
+                    <img src="\static\img\{% if user.image %}{{ user.image }}{% else %}{{default_user_avatar}} {% endif %}"
+                         width="50"
+                         height="50">
+                </a>
+            </td>
+            <td style="background-color: lightgrey"><h1>{{user.name}}</h1>
+            </td>
+        </tr>
+        {% endfor %}
+        </li>
+    </table>
+</div>
+{% endblock %}
