@@ -116,8 +116,13 @@ def create_article():
         sess = create_session()
         sess.merge(current_user)
         sess.commit()
-        return render_template('article.html', article=a)
+        return redirect(f'/article/{a.id}')
     return render_template('new_article.html', form=form)
+
+@app.route('/article/<int:article_id>')
+def article(article_id):
+    article = create_session().query(Article).filter(Article.id == article_id).first()
+    return render_template('article.html', article=article)
 
 
 @app.route('/edit_profile', methods=['POST', 'GET'])
