@@ -5,15 +5,13 @@ from sqlalchemy.types import Integer
 from .db_session import SqlAlchemyBase
 
 
-class Article(SqlAlchemyBase):
-    __tablename__ = "articles"
+class Comment(SqlAlchemyBase):
+    __tablename__ = "comments"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String)
-    image = Column(String)
     content = Column(String)
     created_date = Column(DateTime(timezone=True), default=func.now())
     user_id = Column(ForeignKey("users.id"))
-    user = relationship('User', back_populates="articles")
-    comments = relationship('Comment', back_populates="user")
-
+    user = relationship('User', back_populates="comments")
+    article_id = Column(ForeignKey("article.id"))
+    article = relationship('Article', back_populates="comments")

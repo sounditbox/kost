@@ -17,6 +17,7 @@ class User(SqlAlchemyBase, UserMixin):
     image = Column(String)
     about = Column(String)
     articles = relationship('Article', back_populates="user")
+    comments = relationship('Comment', back_populates="user")
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
