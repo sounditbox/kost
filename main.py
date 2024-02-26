@@ -119,14 +119,20 @@ def create_article():
         return redirect('/articles')
     return render_template('new_article.html', form=form)
 
+
 @app.route('/article/<int:article_id>')
 def article(article_id):
-    article = create_session().query(Article).filter(Article.id == article_id).first()
+    article = create_session().query(Article).filter(
+        Article.id == article_id).first()
     return render_template('article.html', article=article)
+
 
 @app.route('/articles')
 def articles():
-    return render_template('articles.html', articles=create_session().query(Article).all())
+    return render_template('articles.html',
+                           articles=create_session().query(Article).all())
+
+
 @app.route('/edit_profile', methods=['POST', 'GET'])
 @login_required
 def edit_profile():
