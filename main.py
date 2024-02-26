@@ -7,7 +7,9 @@ from werkzeug.utils import secure_filename
 
 from data.db_session import global_init, create_session
 from data.users import User
+from data.comments import Comment
 from data.articles import Article
+from forms.comment import CommentForm
 from forms.edit_profile import EditProfileForm
 from forms.login import LoginForm
 from forms.register import RegisterForm
@@ -101,6 +103,22 @@ def register():
         sess.commit()
         return redirect('/login')
     return render_template('register.html', form=form)
+
+
+@login_required
+@app.route('/article/<int:article_id>/comment', methods=['GET', 'POST'])
+def comment(article_id):
+    form = CommentForm()
+    sess = create_session()
+    article = sess.query(Article).get(article_id)
+    if form.validate_on_submit():
+        comment = Comment()
+        comment.content = form.data.content
+        comment.user = current_user
+        comment.article = article
+        sess.merge(comment)
+        return redirect(f'/article/{article_id}')
+    return render_template('comment.html', article=article)
 
 
 @app.route('/create_article', methods=['POST', 'GET'])
